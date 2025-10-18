@@ -34,41 +34,49 @@ def load_user(user_id):
 # --- DATABASE CREATION & SEEDING ---
 @app.before_request
 def create_tables():
-    # Temporarily comment out this check for the first deploy
-    # if app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///project.db' and not os.path.exists('project.db'):
-
-    # --- This block will now run on Render too ---
-    with app.app_context():
-        # Check if tables *actually* exist before trying to create/seed
-        inspector = db.inspect(db.engine)
-        if not inspector.has_table("user"): # Check for one of the tables
-            db.create_all()
-            print("Database tables created.")
-            # --- Seed Super Admin ---
-            if User.query.count() == 0:
-                # ... (rest of your seeding code) ...
-                print("Seeding Super Admin...")
-                super_admin = User(full_name="Super Admin", username="superadmin", role="Super Admin")
-                super_admin.set_password("admin123"); db.session.add(super_admin); db.session.commit()
-                print("Super Admin seeded.")
-            # --- Seed Teams ---
-            if Team.query.count() == 0:
-                 # ... (rest of your seeding code) ...
-                 teams = [ Team(team_name="Puthiya Sirakukal", captain_name="Govindaraj"), Team(team_name="APJ Tamizhan Youngstars", captain_name="Silambu R"), Team(team_name="Mighty Cricket Club", captain_name="Barathi K"), Team(team_name="SPARTAN ROCKERZ", captain_name="Barathi K"), Team(team_name="Crazy-11", captain_name="Nithyaraj"), Team(team_name="Jolly Players", captain_name="Vinoth"), Team(team_name="Dada Warriors", captain_name="Praveen prabhakaran"), Team(team_name="Thunder Strikers", captain_name="Gurunathan S") ]
-                 db.session.bulk_save_objects(teams); db.session.commit(); print(f"{len(teams)} teams seeded.")
-            # --- Seed Players ---
-            if Player.query.count() == 0:
-                 # ... (rest of your seeding code) ...
-                 players = [ Player(player_name="Vasanth Ab", image_filename="vasanth_ab.png", cpl_2024_team="Crazy-11", cpl_2024_innings=8, cpl_2024_runs=302, cpl_2024_average=50.33, cpl_2024_sr=107.86, cpl_2024_hs=75, overall_matches=135, overall_runs=2813, overall_wickets=38, overall_bat_avg=25.81, overall_bowl_avg=21.61), Player(player_name="Mukil Hitman", image_filename="mukil_hitman.jpg", cpl_2024_team="Thunder Strikers", cpl_2024_innings=9, cpl_2024_runs=268, cpl_2024_average=29.78, cpl_2024_sr=120.18, cpl_2024_hs=46, overall_matches=263, overall_runs=7278, overall_wickets=99, overall_bat_avg=31.51, overall_bowl_avg=20.73), #... add image_filename to ALL players ...
-                 ]
-                 db.session.bulk_save_objects(players); db.session.commit(); print(f"{len(players)} players seeded.")
-        else:
-            print("Database tables already exist.")
-    # --- End of block ---
-
-    # Re-add the closing parenthesis if you commented out the if statement line
-    # else:
-    #    print("Skipping table creation/seeding (not using local SQLite or DB exists).")
+    # Only run table creation/seeding logic once per app startup, typically needed for local dev
+    # For Render/persistent DBs, this ensures seeding doesn't run on every request after the first time.
+    if not hasattr(app, 'tables_created'):
+        with app.app_context():
+            # Check if tables *actually* exist before trying to create/seed
+            inspector = db.inspect(db.engine)
+            if not inspector.has_table("user"): # Check for one of the tables
+                db.create_all()
+                print("Database tables created.")
+                # --- Seed Super Admin ---
+                if User.query.count() == 0:
+                    print("Creating Super Admin...")
+                    super_admin = User( full_name="Super Admin", username="superadmin", role="Super Admin")
+                    super_admin.set_password("admin123") # Default password
+                    db.session.add(super_admin)
+                    db.session.commit()
+                    print("Super Admin created with username 'superadmin' and password 'admin123'")
+                # --- Seed Teams ---
+                if Team.query.count() == 0:
+                     teams = [ Team(team_name="Puthiya Sirakukal", captain_name="Govindaraj"), Team(team_name="APJ Tamizhan Youngstars", captain_name="Silambu R"), Team(team_name="Mighty Cricket Club", captain_name="Barathi K"), Team(team_name="SPARTAN ROCKERZ", captain_name="Barathi K"), Team(team_name="Crazy-11", captain_name="Nithyaraj"), Team(team_name="Jolly Players", captain_name="Vinoth"), Team(team_name="Dada Warriors", captain_name="Praveen prabhakaran"), Team(team_name="Thunder Strikers", captain_name="Gurunathan S") ]
+                     db.session.bulk_save_objects(teams); db.session.commit(); print(f"{len(teams)} teams seeded.")
+                # --- Seed Players ---
+                if Player.query.count() == 0:
+                    print("Attempting to seed players...")
+                    # *** CORRECTED PLAYER LIST WITH image_filename ***
+                    players_to_seed = [
+                        Player(player_name="Vasanth Ab", image_filename="vasanth_ab.png", cpl_2024_team="Crazy-11", cpl_2024_innings=8, cpl_2024_runs=302, cpl_2024_average=50.33, cpl_2024_sr=107.86, cpl_2024_hs=75, overall_matches=135, overall_runs=2813, overall_wickets=38, overall_bat_avg=25.81, overall_bowl_avg=21.61),
+                        Player(player_name="Mukil Hitman", image_filename="mukil_hitman.jpg", cpl_2024_team="Thunder Strikers", cpl_2024_innings=9, cpl_2024_runs=268, cpl_2024_average=29.78, cpl_2024_sr=120.18, cpl_2024_hs=46, overall_matches=263, overall_runs=7278, overall_wickets=99, overall_bat_avg=31.51, overall_bowl_avg=20.73),
+                        Player(player_name="M Govindaraj", image_filename="govindaraj.png", cpl_2024_team="Puthiya Sirakukal", cpl_2024_innings=6, cpl_2024_runs=223, cpl_2024_average=44.60, cpl_2024_sr=153.79, cpl_2024_hs=95, overall_matches=83, overall_runs=2098, overall_wickets=56, overall_bat_avg=29.14, overall_bowl_avg=15.32),
+                        Player(player_name="Nithesh Kumar", image_filename="nithesh_kumar.png", cpl_2024_team="APJ Tamizhan Youngstars", cpl_2024_innings=8, cpl_2024_runs=194, cpl_2024_average=24.25, cpl_2024_sr=125.16, cpl_2024_hs=87, overall_matches=220, overall_runs=3485, overall_wickets=77, overall_bat_avg=21.65, overall_bowl_avg=26.03),
+                        Player(player_name="Poovarasan", image_filename="poovarasan.png", cpl_2024_team="SPARTAN ROCKERZ", cpl_2024_innings=6, cpl_2024_runs=186, cpl_2024_average=31.00, cpl_2024_sr=137.78, cpl_2024_hs=63, overall_matches=237, overall_runs=5776, overall_wickets=157, overall_bat_avg=29.03, overall_bowl_avg=19.72),
+                        Player(player_name="R Raja", image_filename="r_raja.png", cpl_2024_team="APJ Tamizhan Youngstars", cpl_2024_innings=8, cpl_2024_runs=171, cpl_2024_average=21.38, cpl_2024_sr=133.59, cpl_2024_hs=61, overall_matches=118, overall_runs=1971, overall_wickets=49, overall_bat_avg=18.95, overall_bowl_avg=13.31),
+                        Player(player_name="Silambu R", image_filename="silambu_r.png", cpl_2024_team="APJ Tamizhan Youngstars", cpl_2024_innings=8, cpl_2024_runs=147, cpl_2024_average=24.50, cpl_2024_sr=125.64, cpl_2024_hs=46, overall_matches=109, overall_runs=1908, overall_wickets=147, overall_bat_avg=23.27, overall_bowl_avg=12.35),
+                        Player(player_name="Prabha", image_filename="prabha.png", cpl_2024_team="Jolly Players", cpl_2024_innings=6, cpl_2024_runs=136, cpl_2024_average=45.33, cpl_2024_sr=107.09, cpl_2024_hs=29, overall_matches=279, overall_runs=6883, overall_wickets=195, overall_bat_avg=35.48, overall_bowl_avg=13.39),
+                        Player(player_name="Hariharan R", image_filename="hariharan_r.png", cpl_2024_team="Thunder Strikers", cpl_2024_innings=9, cpl_2024_runs=130, cpl_2024_average=14.44, cpl_2024_sr=83.33, cpl_2024_hs=34, overall_matches=142, overall_runs=1984, overall_wickets=81, overall_bat_avg=17.71, overall_bowl_avg=18.36),
+                        Player(player_name="Ramesh G", image_filename=None, cpl_2024_team="APJ Tamizhan Youngstars", cpl_2024_innings=8, cpl_2024_runs=126, cpl_2024_average=18.00, cpl_2024_sr=104.13, cpl_2024_hs=39, overall_matches=87, overall_runs=1156, overall_wickets=46, overall_bat_avg=18.35, overall_bowl_avg=20.78),
+                    ]
+                    db.session.bulk_save_objects(players_to_seed) # Use the correct variable name
+                    db.session.commit()
+                    print(f"{len(players_to_seed)} players seeded.") # Use the correct variable name
+                else:
+                    print("Database tables already exist.")
+        app.tables_created = True # Mark tables as created/checked for this app run
 
         # REMEMBER TO UNCOMMENT THE 'if' LATER
 
@@ -433,5 +441,6 @@ def export_team_excel(team_id):
 if __name__ == '__main__':
 
     app.run(debug=True) # Run in debug mode for development
+
 
 
