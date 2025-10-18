@@ -34,41 +34,34 @@ def load_user(user_id):
 # --- DATABASE CREATION & SEEDING ---
 @app.before_request
 def create_tables():
-    # Temporarily comment out this check for the first deploy
-    # if app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///project.db' and not os.path.exists('project.db'):
+    # ... (db.create_all() and seeding for User and Team) ...
 
-    # --- This block will now run on Render too ---
-    with app.app_context():
-        # Check if tables *actually* exist before trying to create/seed
-        inspector = db.inspect(db.engine)
-        if not inspector.has_table("user"): # Check for one of the tables
-            db.create_all()
-            print("Database tables created.")
-            # --- Seed Super Admin ---
-            if User.query.count() == 0:
-                # ... (rest of your seeding code) ...
-                print("Seeding Super Admin...")
-                super_admin = User(full_name="Super Admin", username="superadmin", role="Super Admin")
-                super_admin.set_password("admin123"); db.session.add(super_admin); db.session.commit()
-                print("Super Admin seeded.")
-            # --- Seed Teams ---
-            if Team.query.count() == 0:
-                 # ... (rest of your seeding code) ...
-                 teams = [ Team(team_name="Puthiya Sirakukal", captain_name="Govindaraj"), Team(team_name="APJ Tamizhan Youngstars", captain_name="Silambu R"), Team(team_name="Mighty Cricket Club", captain_name="Barathi K"), Team(team_name="SPARTAN ROCKERZ", captain_name="Barathi K"), Team(team_name="Crazy-11", captain_name="Nithyaraj"), Team(team_name="Jolly Players", captain_name="Vinoth"), Team(team_name="Dada Warriors", captain_name="Praveen prabhakaran"), Team(team_name="Thunder Strikers", captain_name="Gurunathan S") ]
-                 db.session.bulk_save_objects(teams); db.session.commit(); print(f"{len(teams)} teams seeded.")
-            # --- Seed Players ---
-            if Player.query.count() == 0:
-                 # ... (rest of your seeding code) ...
-                 players = [ Player(player_name="Vasanth Ab", image_filename="vasanth_ab.png", cpl_2024_team="Crazy-11", cpl_2024_innings=8, cpl_2024_runs=302, cpl_2024_average=50.33, cpl_2024_sr=107.86, cpl_2024_hs=75, overall_matches=135, overall_runs=2813, overall_wickets=38, overall_bat_avg=25.81, overall_bowl_avg=21.61), Player(player_name="Mukil Hitman", image_filename="mukil_hitman.jpg", cpl_2024_team="Thunder Strikers", cpl_2024_innings=9, cpl_2024_runs=268, cpl_2024_average=29.78, cpl_2024_sr=120.18, cpl_2024_hs=46, overall_matches=263, overall_runs=7278, overall_wickets=99, overall_bat_avg=31.51, overall_bowl_avg=20.73), #... add image_filename to ALL players ...
-                 ]
-                 db.session.bulk_save_objects(players); db.session.commit(); print(f"{len(players)} players seeded.")
+        # --- Seed Players ---
+        # TEMPORARILY COMMENT OUT THIS CHECK:
+        # if Player.query.count() == 0:
+
+        # --- This block will now run on Render again ---
+        print("Attempting to seed players...") # Add a print statement
+        players_to_seed = [ # Define the list outside the potential old 'if'
+            Player(player_name="Vasanth Ab", image_filename="vasanth_ab.png", ...), # Add all player details
+            Player(player_name="Mukil Hitman", image_filename="mukil_hitman.jpg", ...),
+            # ... ADD ALL 10 PLAYERS HERE with their image_filename ...
+            Player(player_name="Ramesh G", ...),
+        ]
+
+        # Optional: Check if players *already* exist by name to avoid duplicates if needed
+        existing_player_names = {p.player_name for p in Player.query.all()}
+        new_players = [p for p in players_to_seed if p.player_name not in existing_player_names]
+
+        if new_players:
+            db.session.bulk_save_objects(new_players)
+            db.session.commit()
+            print(f"{len(new_players)} new players seeded.")
         else:
-            print("Database tables already exist.")
-    # --- End of block ---
+             print("All players already seem to exist in the database.")
+        # END OF FORCED BLOCK
 
-    # Re-add the closing parenthesis if you commented out the if statement line
-    # else:
-    #    print("Skipping table creation/seeding (not using local SQLite or DB exists).")
+        # REMEMBER TO UNCOMMENT THE 'if' LATER
 
 # --- CUSTOM DECORATORS for security ---
 def role_required(role_names):
@@ -431,3 +424,4 @@ def export_team_excel(team_id):
 if __name__ == '__main__':
 
     app.run(debug=True) # Run in debug mode for development
+
