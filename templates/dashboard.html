@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="main-container"> 
+    <h2 class="page-title">Welcome, {{ current_user.full_name }} ({{ current_user.role }})</h2>
+    
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h3>Captain Tools</h3>
+            <ul class="dashboard-links">
+                <li><a href="{{ url_for('players') }}">View All Players</a></li>
+                <li><a href="{{ url_for('teams') }}">View All Teams</a></li>
+                </ul>
+        </div>
+
+        {% if current_user.role == 'Admin' or current_user.role == 'Super Admin' %}
+        <div class="dashboard-card">
+            <h3>Admin Tools</h3>
+            <ul class="dashboard-links">
+                <li><a href="{{ url_for('auctions') }}">Conduct Auction</a></li>
+                </ul>
+        </div>
+        {% endif %}
+
+        {% if current_user.role == 'Super Admin' %}
+        <div class="dashboard-card">
+            <h3>Super Admin Tools</h3>
+            <ul class="dashboard-links">
+                <li><a href="{{ url_for('create_user') }}">Create New User (Admin/Captain)</a></li>
+                </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

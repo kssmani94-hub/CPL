@@ -1,0 +1,1374 @@
+/* --- General Styles --- */
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdeef5; /* Light pink background */
+    color: #333;
+}
+
+/* --- Container used for consistent width and centering --- */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.main-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+/* --- New Navigation Bar --- */
+nav {
+    background-color: #ffffff;
+    padding: 5px 0; /* Set to the "shrunk" size permanently */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease; /* Only shadow changes */
+}
+
+nav.scrolled {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Only shadow changes */
+}
+
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #d13a80;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 18px;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:not(.active):hover {
+    background-color: #fcebf2;
+    color: #d13a80;
+    transform: scale(1.1);
+}
+
+nav ul li a.active {
+    background-color: #d13a80;
+    color: white;
+}
+
+nav ul li a.active:hover {
+    background-color: #ba5288;
+    transform: scale(1.1);
+}
+
+
+/* --- New Home Page --- */
+.home-card {
+    margin: 30px auto 0 auto;
+    padding: 40px 50px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.07);
+}
+
+.welcome-header h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+    color: #555;
+}
+
+.welcome-header h1 {
+    font-size: 2.5rem;
+    margin: 5px 0 25px 0;
+    color: #333;
+    font-weight: 700;
+}
+
+.action-buttons .btn {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #444;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.action-buttons .btn:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.stat-box {
+    background: #fdf6fa;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(209, 58, 128, 0.1);
+}
+
+.stat-box span {
+    display: block;
+    font-size: 1rem;
+    color: #666;
+    font-weight: 600;
+}
+
+.stat-box .number {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #d13a80;
+    margin-top: 8px;
+}
+
+/* --- MODIFIED CHAMPION FOOTER --- */
+.champion-footer {
+    background-image: linear-gradient(rgba(186, 82, 136, 0.75), rgba(186, 82, 136, 0.75)), url('https://via.placeholder.com/1000x200.png?text=Champion+Team+Photo');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 30px 25px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.champion-details {
+    font-size: 1rem;
+    line-height: 1.5;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.champion-details span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+/* --- Media Queries for Responsive --- */
+@media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Stack charts on smaller screens */
+    }
+}
+
+@media (max-width: 500px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .home-card {
+        padding: 25px 20px;
+    }
+    .welcome-header h1 {
+        font-size: 2rem;
+    }
+}
+
+
+/* --- Styles removed in previous steps --- */
+
+
+/* --- NEW STYLES FOR PERFORMERS AND FOOTER --- */
+
+.top-performers-section {
+    background-color: #fdf6fa;
+    padding: 40px 0;
+    margin-top: 0;
+}
+
+
+.top-performers-section h2 {
+    color: #d13a80;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.performers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.performer-card {
+    display: flex;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    color: white;
+    align-items: flex-end;
+    min-height: 200px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.performer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+
+.performer-card .player-image img {
+    max-width: 100%;
+    display: block;
+    transform: scale(1.1);
+}
+
+.performer-card .performer-stats {
+    flex-basis: 60%;
+    padding: 20px;
+    text-align: right;
+}
+
+.performer-stats .stat-title {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.performer-stats .player-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.performer-stats .stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.performer-stats .stat-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+footer {
+    background-color: #333;
+    color: #ccc;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* Responsive for Performers */
+@media (max-width: 1000px) {
+    .performers-grid {
+        grid-template-columns: 1fr;
+    }
+    .performer-card .player-name {
+        font-size: 1.3rem;
+    }
+    .performer-stats .stat-value {
+        font-size: 2.1rem;
+    }
+}
+
+
+/* --- STYLES FOR PLAYERS PAGE (FIXED) --- */
+
+.page-title {
+    text-align: center;
+    color: #d13a80;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 30px 0;
+}
+
+.player-table-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    overflow: hidden;
+}
+
+.player-table-grid {
+    display: grid;
+    /* 11 columns: Player Name (2fr) + 5 CPL (1fr) + 5 Overall (1fr) */
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+}
+
+/* --- Table Header Styling (V3 - Explicit Grid) --- */
+
+.player-table-grid.player-header {
+    display: grid;
+    /* Define 2 rows and 11 columns */
+    grid-template-rows: auto auto;
+    grid-template-columns: 2fr repeat(10, 1fr); /* Player (2fr) + 10 stats (1fr each) */
+    align-items: center; /* Vertically center content in cells */
+}
+
+/* Base style for all header cells */
+.player-table-grid.player-header .header-cell {
+    padding: 10px; /* Adjust padding as needed */
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Styles for Row 1 (Main Headers) */
+.player-table-grid.player-header .main-header {
+    background-color: #ba5288; /* Dark Pink */
+    color: white !important;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+}
+
+.player-table-grid.player-header .player-name-header {
+    grid-row: 1 / 3; /* Span both rows */
+    grid-column: 1 / 2; /* First column */
+    text-align: left;
+    padding-left: 20px;
+    font-size: 1rem;
+    border-right: 2px solid #ba5288; /* Vertical line */
+    align-self: stretch; /* Make it fill the height */
+    display: flex; /* Use flex to vertically center text */
+    align-items: center; /* Vertical centering */
+    background-color: #ba5288; /* Explicitly set background */
+    z-index: 1; /* Make sure it's above sub-headers if needed */
+    position: relative; /* Needed for z-index */
+	color: white;
+}
+
+.player-table-grid.player-header .cpl-stats-header {
+    grid-row: 1 / 2; /* First row only */
+    grid-column: 2 / 7; /* Columns 2 through 6 */
+    /* Ensure background is set */
+    background-color: #ba5288;
+    color: white;
+}
+
+.player-table-grid.player-header .overall-stats-header {
+    grid-row: 1 / 2; /* First row only */
+    grid-column: 7 / 12; /* Columns 7 through 11 */
+    /* Ensure background is set */
+    background-color: #ba5288;
+	color: white;
+}
+
+/* Styles for Row 2 (Sub-Headers) */
+.player-table-grid.player-header .sub-header {
+    background-color: #fcebf2;
+    color: #ba5288;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 12px 10px;
+    grid-row: 2 / 3; /* Second row only */
+}
+
+/* Assign columns explicitly to sub-headers */
+.player-table-grid.player-header .cpl-innings { grid-column: 2 / 3; }
+.player-table-grid.player-header .cpl-runs    { grid-column: 3 / 4; }
+.player-table-grid.player-header .cpl-avg     { grid-column: 4 / 5; }
+.player-table-grid.player-header .cpl-sr      { grid-column: 5 / 6; }
+.player-table-grid.player-header .cpl-hs      { grid-column: 6 / 7; }
+.player-table-grid.player-header .ovr-matches { grid-column: 7 / 8; }
+.player-table-grid.player-header .ovr-runs    { grid-column: 8 / 9; }
+.player-table-grid.player-header .ovr-wickets { grid-column: 9 / 10; }
+.player-table-grid.player-header .ovr-batavg  { grid-column: 10 / 11; }
+.player-table-grid.player-header .ovr-bowlavg { grid-column: 11 / 12; }
+
+/* Vertical border for HS column */
+.player-table-grid.player-header .hs-header {
+    border-right: 2px solid #ba5288;
+}
+
+/* --- End Table Header Styling --- */
+
+
+/* --- Table Data Row Styling --- */
+.player-table-grid.player-row {
+    background: #fff;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: box-shadow 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.player-table-grid.player-row:hover {
+    box-shadow: 0 5px 15px rgba(209, 58, 128, 0.1);
+    z-index: 10;
+}
+
+.player-table-grid.player-row:last-of-type {
+    border-bottom: none;
+}
+
+.player-table-grid.player-row .data-cell {
+    padding: 18px 10px;
+    text-align: center;
+    color: #333;
+    font-weight: 400;
+}
+
+.player-table-grid.player-row .data-cell.player-name {
+    text-align: left;
+    padding-left: 20px;
+    font-weight: 600;
+    color: #d13a80;
+    border-right: 2px solid #e0e0e0; /* Vertical line */
+}
+
+/* Vertical Divider for data rows*/
+.player-table-grid .hs-cell {
+    border-right: 2px solid #e0e0e0;
+}
+
+/* --- STYLES FOR PLAYER PAGE FILTERS --- */
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #ddd;
+    background: #f0f0f0;
+    color: #444;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background: #e0e0e0;
+}
+
+.filter-btn.active {
+    background-color: #d13a80;
+    color: white;
+    border-color: #d13a80;
+}
+
+/* Player Row Highlighting */
+.player-row.sold {
+    background-color: #e6ffed; /* Light green */
+}
+
+.player-row.sold .data-cell.player-name {
+    color: #006117; /* Dark green */
+}
+
+.player-row.unsold {
+    background-color: #fff; /* Default white for unsold */
+}
+
+/* --- STYLES FOR FLASH MESSAGES --- */
+
+.flash-message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border: 1px solid transparent; /* Base border */
+}
+
+.flash-message.info {
+    background: #e0f7fa;
+    color: #006064;
+    border-color: #b2ebf2;
+}
+
+.flash-message.success {
+    background: #e8f5e9;
+    color: #1b5e20;
+    border-color: #c8e6c9;
+}
+
+.flash-message.error {
+    background: #ffebee;
+    color: #c62828;
+    border-color: #ffcdd2;
+}
+
+
+/* --- STYLES FOR TEAMS PAGE --- */
+
+.page-subtitle {
+    text-align: center;
+    color: #555;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: -20px;
+    margin-bottom: 30px;
+}
+
+.table-container {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    overflow: hidden; /* To keep the radius on the header */
+}
+
+.team-status-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.team-status-table thead tr {
+    background-color: #ba5288;
+    color: white;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.team-status-table th,
+.team-status-table td {
+    padding: 18px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.team-status-table th {
+    font-weight: 700;
+}
+
+.team-status-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.team-status-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.team-status-table tbody tr:hover {
+    background-color: #fdf6fa; /* Light pink theme */
+}
+
+/* --- Data Cell Styling --- */
+
+.team-status-table td[data-label="Team Name"] {
+    color: #d13a80;
+    font-weight: 600;
+}
+
+.team-status-table td[data-label="Purse Remaining"] {
+    font-weight: 600;
+    color: #008000; /* Green for remaining money */
+}
+
+.team-status-table td[data-label="Purse Spent"] {
+    color: #aa0000; /* Red for money spent */
+}
+
+/* Align numbers to the right for clarity */
+.team-status-table th:nth-child(3),
+.team-status-table td:nth-child(3),
+.team-status-table th:nth-child(4),
+.team-status-table td:nth-child(4),
+.team-status-table th:nth-child(5),
+.team-status-table td:nth-child(5),
+.team-status-table th:nth-child(6),
+.team-status-table td:nth-child(6) {
+    text-align: right;
+}
+
+/* --- STYLES FOR AUCTION PAGE --- */
+
+.auction-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.07);
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.auction-player-info {
+    display: flex;
+    flex-wrap: wrap; /* Stack on small screens */
+    padding: 30px; /* Increased padding */
+}
+
+.auction-player-photo {
+    flex-basis: 250px;
+    margin-right: 30px; /* Increased margin */
+}
+
+.auction-player-photo img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.auction-player-details {
+    flex: 1;
+}
+
+.auction-player-details h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.status-btn {
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none; /* For links styled as buttons */
+    display: inline-block; /* For links styled as buttons */
+}
+
+.status-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.status-btn.sold-btn {
+    background-color: #28a745;
+}
+
+.status-btn.unsold-btn {
+    background-color: #dc3545;
+}
+
+.auction-stats-tables {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stats-table-wrapper {
+    flex: 1;
+    min-width: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fdf6fa;
+}
+
+.stats-table-wrapper h3 {
+    background-color: #ba5288;
+    color: white;
+    padding: 10px 15px;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.mini-stats-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mini-stats-table th,
+.mini-stats-table td {
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.mini-stats-table thead tr {
+    background-color: #fcebf2;
+}
+.mini-stats-table thead th {
+    color: #ba5288;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.mini-stats-table tbody tr {
+    border-top: 1px solid #f0e6ea;
+}
+
+.mini-stats-table tbody td {
+    font-weight: 600;
+    color: #333;
+}
+
+/* --- NEW: AUCTION DASHBOARD STYLES --- */
+
+.auction-dashboard {
+    margin-top: 30px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.dashboard-chart {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 20px 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.07);
+}
+
+.dashboard-chart h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #d13a80;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.bar-item {
+    margin-bottom: 12px;
+}
+
+.bar-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.bar-track {
+    height: 20px;
+    background: #fcebf2;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background-color: #ba5288;
+    border-radius: 10px;
+    transition: width 0.5s ease-out;
+}
+
+/* Responsive for Dashboard */
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Stack charts */
+    }
+}
+
+
+/* --- STYLES FOR VISITOR AUCTION CARD --- */
+
+.auction-card-simple {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    padding: 40px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.auction-card-simple .page-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.auction-card-simple .page-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0;
+}
+
+
+/* --- STYLES FOR AUCTION ADMIN PANEL --- */
+
+.auction-admin-panel {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    padding: 20px 25px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 15px; /* Add gap for wrapped items */
+}
+
+.auction-admin-panel h3 {
+    margin: 0;
+    color: #d13a80;
+    flex-basis: 100%; /* Title takes full width */
+    margin-bottom: 10px; /* Space below title */
+    text-align: center;
+}
+
+/* Ensure forms/buttons align correctly */
+.auction-admin-panel > a,
+.auction-admin-panel > form {
+    display: inline-block; /* Allows items to sit side-by-side */
+    margin: 0; /* Remove default form margin */
+}
+
+/* Center buttons when wrapped */
+@media (max-width: 500px) {
+    .auction-admin-panel {
+        justify-content: center;
+    }
+}
+
+
+/* --- STYLES FOR AUCTION ACTION FORMS --- */
+
+.auction-actions {
+    display: flex;
+    gap: 20px; /* Space between Sold and Unsold sections */
+    margin-top: 20px;
+    align-items: flex-end; /* Align buttons nicely */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.sold-form {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    flex-wrap: wrap; /* Allow wrapping */
+    flex-grow: 1; /* Allow sold form to grow */
+}
+
+.sold-inputs {
+    display: flex;
+    flex-direction: column; /* Stack select and input */
+    gap: 10px;
+    flex-grow: 1; /* Allow inputs to take space */
+}
+
+/* Re-use form styles */
+.sold-inputs .form-select,
+.sold-inputs .form-input {
+    padding: 10px 15px; /* Slightly smaller padding */
+    font-size: 0.9rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    min-width: 150px; /* Adjust min-width */
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif; /* Ensure font consistency */
+}
+.sold-inputs .form-input {
+     width: 100%; /* Make input take full width of container */
+}
+
+.sold-inputs .form-select:focus,
+.sold-inputs .form-input:focus {
+     outline: none;
+    border-color: #d13a80;
+    box-shadow: 0 0 0 3px #fcebf2;
+}
+
+
+/* Adjust button sizes */
+.auction-actions .status-btn {
+    padding: 10px 25px; /* Match input height */
+    margin-bottom: 0; /* Align with bottom of inputs */
+    flex-shrink: 0; /* Prevent buttons from shrinking too much */
+}
+
+.unsold-form {
+    /* No need for margin-left: auto with flex-grow on the sold form */
+}
+/* Responsive adjustments for action buttons */
+@media (max-width: 700px) { /* Adjust breakpoint as needed */
+     .auction-actions {
+        flex-direction: column; /* Stack vertically */
+        align-items: stretch; /* Make items full width */
+        gap: 15px;
+    }
+    .sold-form {
+       width: 100%; /* Take full width */
+       justify-content: space-between;
+    }
+     .sold-inputs {
+        width: 100%;
+        margin-bottom: 10px; /* Space before button */
+    }
+    .sold-form .status-btn.sold-btn {
+         width: 100%;
+    }
+    .unsold-form {
+       width: 100%; /* Take full width */
+       margin-left: 0;
+    }
+     .auction-actions .status-btn {
+        width: 100%; /* Make buttons full width */
+    }
+}
+
+
+/* --- STYLES FOR ADMIN LOGIN PAGE --- */
+
+.login-form-container {
+    max-width: 500px; /* Set a max-width for the form card */
+    margin: 30px auto; /* Center the card on the page */
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    padding: 30px 40px;
+}
+
+.login-form-container h3 {
+    text-align: center;
+    color: #d13a80;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    box-sizing: border-box; /* Important for 100% width */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    outline: none;
+    border-color: #d13a80;
+    box-shadow: 0 0 0 3px #fcebf2; /* Pink glow on focus */
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #d13a80;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: #ba5288;
+    transform: translateY(-2px);
+}
+
+/* --- STYLES FOR DASHBOARD --- */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px; /* Add space below page title */
+}
+
+.dashboard-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    padding: 25px;
+}
+
+.dashboard-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #d13a80;
+    border-bottom: 2px solid #fcebf2;
+    padding-bottom: 10px;
+}
+
+.dashboard-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dashboard-links li {
+    margin-bottom: 10px;
+}
+
+.dashboard-links a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.2s ease;
+}
+
+.dashboard-links a:hover {
+    color: #0056b3;
+}
+
+/* Form Select (for Create User page) */
+.form-select {
+    width: 100%;
+    padding: 12px 15px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    background-color: white;
+    appearance: none;
+    /* Add custom arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236c757d%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Add transition */
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #d13a80;
+    box-shadow: 0 0 0 3px #fcebf2;
+}
+
+/* --- TEAMS PAGE: Player List & Button --- */
+.icon-btn { /* Style for icon buttons */
+    background: none;
+    border: none;
+    color: #d13a80;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 5px;
+}
+.icon-btn:hover {
+    color: #ba5288;
+}
+.no-players {
+    font-size: 0.9rem; /* Match font size */
+    color: #888;
+    font-style: italic;
+    padding: 5px; /* Add padding for alignment */
+    display: inline-block; /* Ensure padding works */
+}
+.player-list-row td {
+    background-color: #fdf6fa !important;
+    padding: 0;
+    border-bottom: 2px solid #ba5288;
+}
+.player-list-details { padding: 20px 30px; }
+.player-list-details h4 { margin-top: 0; margin-bottom: 15px; color: #d13a80; font-size: 1.1rem; }
+.player-name-list { /* Removed ul default styles */
+    list-style: none;
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+.player-name-list li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #333;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eeddee;
+}
+.player-name-list li:last-child {
+    border-bottom: none;
+}
+.player-name-list li span { /* Style points */
+    color: #666;
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+.export-btn {
+    display: inline-flex; /* Use flex for icon alignment */
+    align-items: center;
+    gap: 5px; /* Space between icon and text */
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    background-color: #198754; /* Darker Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+.export-btn:hover { background-color: #157347; }
+.team-status-table th:last-child,
+.team-status-table td:last-child { width: 80px; text-align: center; } /* Reduced width */
+
+/* --- AUCTION PAGE Enhancements --- */
+.auction-player-name {
+    color: #d13a80; /* Theme color for name */
+    /* You can add font-family or weight here if desired */
+    /* font-family: 'Georgia', serif; */
+}
+
+/* Sold Form Styling */
+.sold-form {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    flex-wrap: wrap; /* Allow wrapping */
+    flex-grow: 1;
+    border: 1px dashed #ccc; /* Add visual separation */
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light background */
+}
+.sold-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+}
+/* Style Cancel Button */
+.status-btn.cancel-btn {
+    background-color: #6c757d; /* Grey color */
+    margin-left: 10px; /* Add some space */
+}
+.status-btn.cancel-btn:hover {
+    background-color: #5a6268;
+}
+/* Ensure Unsold button aligns */
+.unsold-form {
+    align-self: flex-end; /* Align to bottom */
+}
+
+/* Dashboard Title */
+.dashboard-title {
+    text-align: center;
+    color: #333; /* Darker color */
+    font-size: 1.8rem; /* Match previous style */
+    font-weight: 700;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #fcebf2;
+    padding-bottom: 10px;
+}
+/* Center Charts */
+.dashboard-grid {
+    /* display: grid; already set */
+    justify-content: center; /* Center grid items horizontally if grid width allows */
+    /* align-items: start; */ /* Align charts to top */
+}
+.dashboard-chart {
+    /* background: #ffffff; already set */
+    /* border-radius: 15px; already set */
+    /* padding: 20px 25px; already set */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06); /* Slightly softer shadow */
+}
+.dashboard-chart h3 {
+    margin-top: 0; margin-bottom: 25px; /* More space */
+    color: #d13a80; font-size: 1.1rem; font-weight: 700;
+    text-align: center; /* Center heading */
+}
+.dashboard-chart h3 small { /* Style subtitle */
+    font-weight: 400;
+    font-size: 0.8em;
+    color: #666;
+    display: block; /* Put on new line */
+    margin-top: 3px;
+}
+/* Style Bar Labels inside bars */
+.bar-fill span {
+    position: absolute;
+    right: 8px; /* Position to the right */
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+.bar-fill.purse-bar { background-color: #28a745; } /* Green for purse */
+.bar-fill.slot-bar { background-color: #0d6efd; } /* Blue for slots */
+.bar-track { height: 24px; border-radius: 12px; } /* Slightly thicker bar */
+.bar-fill { border-radius: 12px; position: relative; } /* Needed for absolute positioning span */
+
+
+/* --- DASHBOARD PAGE --- */
+/* Remove Admin Tools Card - No CSS needed, done in HTML */
+/* User Management Table */
+.user-management-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+.user-management-table th,
+.user-management-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+.user-management-table thead tr {
+    background-color: #f8f9fa; /* Light grey header */
+    color: #333;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+.user-management-table th { font-weight: 600; }
+.user-management-table tbody tr:hover { background-color: #fdf6fa; }
+.user-management-table td:last-child { width: 150px; text-align: center; } /* Actions column */
+.edit-btn, .delete-btn { /* Basic button styles */
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    margin: 0 3px;
+}
+.edit-btn { background-color: #0d6efd; } /* Blue */
+.delete-btn { background-color: #dc3545; } /* Red */
+
+/* Pause Button Style */
+.status-btn.pause-btn {
+    background-color: #ffc107; /* Yellow */
+    color: #333;
+}
+.status-btn.pause-btn:hover {
+    background-color: #e0a800;
+}
+/* Group Admin Buttons */
+.admin-buttons-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: flex-end; /* Align to the right */
+}
+/* Cancel Link */
+.cancel-link {
+    display: block; text-align: center; margin-top: 15px;
+    color: #6c757d; text-decoration: none; font-size: 0.9rem;
+}
+.cancel-link:hover { text-decoration: underline; 
+
+}
+
+/* --- IMAGE SIZE CONTROL --- */
+
+/* For Top Performer Images on Home Page */
+.top-performer-img {
+    width: 150px;  /* Set desired width */
+    height: 200px; /* Set desired height */
+    object-fit: cover; /* Or 'contain', 'fill', 'scale-down' */
+    /* Add any other styles like border-radius */
+    border-radius: 5px; /* Example */
+}
+
+/* For Top Performer Images on Home Page */
+.top-batter-img {
+    width: 150px;  /* Set desired width */
+    height: 200px; /* Set desired height */
+    object-fit: cover; /* Or 'contain', 'fill', 'scale-down' */
+    /* Add any other styles like border-radius */
+    border-radius: 5px; /* Example */
+}
+
+/* For Top Performer Images on Home Page */
+.top-bowler-img {
+    width: 180px;  /* Set desired width */
+    height: 250px; /* Set desired height */
+    object-fit: cover; /* Or 'contain', 'fill', 'scale-down' */
+    /* Add any other styles like border-radius */
+    border-radius: 6px; /* Example */
+}
+.performer-card .player-image {
+    flex-basis: 50%;
+}
+
+
+
+/* For the Player Image on the Auction Page */
+.auction-page-player-img {
+    width: 100%; /* Make it fill the container */
+    max-width: 250px; /* But don't let it get too big */
+    height: auto;     /* Maintain aspect ratio */
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- You might need to adjust the container too --- */
+/* Example: Adjusting the auction photo container if needed */
+.auction-player-photo {
+    flex-basis: auto; /* Let the image size dictate the container width */
+    width: 250px;     /* Match the max-width of the image */
+    margin-right: 30px;
+}

@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+SQLAlchemy
+psycopg2-binary   # The driver for PostgreSQL
+python-dotenv     # To read our .env file
+gunicorn          # For running the app on Render
+Flask-Login
+Werkzeug
+pandas
+openpyxl

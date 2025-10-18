@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block title %}CPL 2025 - Home{% endblock %}
+{% block content %}
+<div class="main-container"> 
+    <div class="home-card">
+        <div class="welcome-header">
+            <h2>Welcome</h2>
+            <h1>Chidambaram Premier League 2025</h1>
+        </div>
+
+        <div class="action-buttons">
+            <a href="#" class="btn">Register Now</a>
+            <a href="#" class="btn">Check Status</a>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span>Register Players</span>
+                <div class="number">{{ player_count }}</div>
+            </div>
+            <div class="stat-box">
+                <span>Slots Remaining</span>
+                <div class="number">{{ slots_remaining }}</div>
+            </div>
+            <div class="stat-box">
+                <span>Teams</span>
+                <div class="number">{{ team_count }}</div>
+            </div>
+            <div class="stat-box">
+                <span>Days to Go</span>
+                <div class="number">{{ days_to_go }}</div>
+            </div>
+        </div>
+
+        <div class="champion-footer">
+            <div class="champion-details">
+                <span>Last year champion</span>
+                Foobles of trihethe | Defending Champions, 2024
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="top-performers-section">
+    <div class="main-container"> 
+        <h2>Top Performers 2024</h2>
+        <div class="performers-grid">
+            
+            <div class="performer-card" style="background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);">
+                <div class="player-image">
+                    <img class="top-batter-img" src="{{ url_for('static', filename='images/chandru.png') }}" alt="Top Batsman">
+                </div>
+                <div class="performer-stats">
+                    <div class="stat-title" style="background-color: #1a936f;">TOP BATSMAN</div>
+                    <div class="player-name">Chandru ABD</div>
+                    <span class="stat-label">Runs</span>
+                    <div class="stat-value">488</div>
+                </div>
+            </div>
+
+            <div class="performer-card" style="background-image: linear-gradient(to right, #d31027 0%, #ea384d 100%);">
+                <div class="player-image">
+                    <img class="top-boweler-img" src="{{ url_for('static', filename='images/simbu.png') }}" alt="Top Bowler">
+                </div>
+                <div class="performer-stats">
+                    <div class="stat-title" style="background-color: #118ab2;">TOP BOWLER</div>
+                    <div class="player-name">Simbu</div>
+                    <span class="stat-label">Wickets</span>
+                    <div class="stat-value">16</div>
+                </div>
+            </div>
+
+            <div class="performer-card" style="background-image: linear-gradient(to right, #f7b733 0%, #fc4a1a 100%);">
+                <div class="player-image">
+                    <img class="top-performer-img" src="{{ url_for('static', filename='images/siva.png') }}" alt="Player of the Season">
+                </div>
+                <div class="performer-stats">
+                    <div class="stat-title" style="background-color: #8338ec;">PLAYER OF THE SEASON</div>
+                    <div class="player-name">Siva</div>
+                    <span class="stat-label">Most Valuable Player</span>
+                    <div class="stat-value">MVP</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block title %}CPL 2025 - Players{% endblock %}
+{% block content %}
+<div class="main-container"> 
+    <h2 class="page-title">CPL 2025 Player Performance</h2>
+
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">Show All</button>
+        <button class="filter-btn" data-filter="sold">Show Sold</button>
+        <button class="filter-btn" data-filter="unsold">Show Unsold</button>
+    </div>
+
+    <div class="player-table-card">
+        
+        <div class="player-table-grid player-header">
+            <div class="header-cell player-name-header">PLAYER</div>
+            <div class="header-cell cpl-stats-header">VPL 2024 STATS</div>
+            <div class="header-cell overall-stats-header">OVERALL RECORD</div>
+            <div class="header-cell sub-header">INNINGS</div>
+            <div class="header-cell sub-header">RUNS</div>
+            <div class="header-cell sub-header">AVG</div>
+            <div class="header-cell sub-header">SR</div>
+            <div class="header-cell sub-header hs-header">HS</div>
+            <div class="header-cell sub-header">MATCHES</div>
+            <div class="header-cell sub-header">RUNS</div>
+            <div class="header-cell sub-header">WICKETS</div>
+            <div class="header-cell sub-header">BAT AVG</div>
+            <div class="header-cell sub-header">BOWL AVG</div>
+        </div>
+        {% for player in players %}
+        <div class="player-table-grid player-row 
+                    {% if player.status == 'Sold' %}
+                        sold
+                    {% else %}
+                        unsold
+                    {% endif %}"
+             data-status="{{ player.status | lower }}">
+            
+            <div class="data-cell player-name">{{ player.player_name }}</div>
+            <div class="data-cell">{{ player.cpl_2024_innings }}</div>
+            <div class="data-cell">{{ player.cpl_2024_runs }}</div>
+            <div class="data-cell">{{ player.cpl_2024_average }}</div>
+            <div class="data-cell">{{ player.cpl_2024_sr }}</div>
+            <div class="data-cell hs-cell">{{ player.cpl_2024_hs }}</div>
+            <div class="data-cell">{{ player.overall_matches }}</div>
+            <div class="data-cell">{{ player.overall_runs }}</div>
+            <div class="data-cell">{{ player.overall_wickets }}</div>
+            <div class="data-cell">{{ player.overall_bat_avg }}</div>
+            <div class="data-cell">{{ player.overall_bowl_avg }}</div>
+        </div>
+        {% endfor %}
+		</div> </div> 
+		<script>
+			const filterButtons = document.querySelectorAll('.filter-btn');
+			const playerRows = document.querySelectorAll('.player-row');
+
+			filterButtons.forEach(button => {
+				button.addEventListener('click', () => {
+					// Update active button style
+					filterButtons.forEach(btn => btn.classList.remove('active'));
+					button.classList.add('active');
+
+					const filterValue = button.getAttribute('data-filter'); // 'all', 'sold', or 'unsold'
+
+					// Show/hide rows based on filter
+					playerRows.forEach(row => {
+						const rowStatus = row.getAttribute('data-status'); // 'sold' or 'unsold' (lowercase)
+
+						if (filterValue === 'all') {
+							row.style.display = 'grid'; // Show all rows (use 'grid' as display type)
+						} else if (filterValue === rowStatus) {
+							row.style.display = 'grid'; // Show matching rows
+						} else {
+							row.style.display = 'none'; // Hide non-matching rows
+						}
+					});
+				});
+			});
+		</script>
+{% endblock %}
