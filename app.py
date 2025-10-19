@@ -56,7 +56,7 @@ def create_tables():
                      teams = [ Team(team_name="Puthiya Sirakukal", captain_name="Govindaraj"), Team(team_name="APJ Tamizhan Youngstars", captain_name="Silambu R"), Team(team_name="Mighty Cricket Club", captain_name="Barathi K"), Team(team_name="SPARTAN ROCKERZ", captain_name="Barathi K"), Team(team_name="Crazy-11", captain_name="Nithyaraj"), Team(team_name="Jolly Players", captain_name="Vinoth"), Team(team_name="Dada Warriors", captain_name="Praveen prabhakaran"), Team(team_name="Thunder Strikers", captain_name="Gurunathan S") ]
                      db.session.bulk_save_objects(teams); db.session.commit(); print(f"{len(teams)} teams seeded.")
                 # --- Seed Players ---
-                if Player.query.count() == 0:
+                #if Player.query.count() == 0:
                     print("Attempting to seed players...")
                     # *** CORRECTED PLAYER LIST WITH image_filename ***
                     players_to_seed = [
@@ -441,6 +441,7 @@ def export_team_excel(team_id):
 if __name__ == '__main__':
 
     app.run(debug=True) # Run in debug mode for development
+
 
 
 
